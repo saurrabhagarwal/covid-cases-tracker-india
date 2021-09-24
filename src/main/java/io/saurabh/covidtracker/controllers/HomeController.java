@@ -16,7 +16,7 @@ public class HomeController {
     @Autowired
     CovidDataService covidDataService;
 
-    @GetMapping("/")
+    @GetMapping("/world")
     public String home(Model model) {
         List<LocationStats> locationStatsList = covidDataService.getLocationStatsList();
         int totalCases = locationStatsList.stream().mapToInt(stats -> stats.getLatestTotalCases()).sum();
@@ -27,7 +27,7 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping("/india")
+    @GetMapping("/")
     public String indiaHome(Model model) {
         model.addAttribute("stateDataList", covidDataService.getStateDataList());
         model.addAttribute("indiaData", covidDataService.getIndiaData());
