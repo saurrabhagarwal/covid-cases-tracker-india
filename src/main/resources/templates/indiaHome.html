@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>India CoronaVirus Tracker Application</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+
+<body>
+<div class="container">
+    <h1> India Coronavirus Tracker Application</h1>
+    <p>This Application lists the current number of cases reported across the India</p>
+    <div class="jumbotron">
+        <h1 class="display-4" th:text="${#numbers.formatDecimal(indiaData.total.confirmed, 0, 'COMMA', 0, 'POINT')}"></h1>
+        <p class="lead">Total Cases reported as of today</p>
+        <h1 class="display-4" th:text="${#numbers.formatDecimal(indiaData.delta.confirmed, 0, 'COMMA', 0, 'POINT')}"></h1>
+        <p class="lead">Total New Cases reported today</p>
+    </div>
+
+    <table class="table table-dark table-striped">
+        <tr>
+
+            <th>State</th>
+            <th> Total Reported Cases</th>
+            <th> Total Recovered Cases</th>
+            <th> Total Deceased Cases</th>
+            <th> Total Tested Cases</th>
+            <th> Total Vaccinated First Dose</th>
+            <th> Total Vaccinated Second Dose</th>
+            <th> Recorded Date</th>
+
+        </tr>
+        <tr th:each="stats : ${stateDataList}">
+            <td th:text="${stats.state}"></td>
+            <td th:text="${#numbers.formatDecimal(stats.total.confirmed, 0, 'COMMA', 0, 'POINT')}">0</td>
+            <td th:text="${#numbers.formatDecimal(stats.total.recovered, 0, 'COMMA', 0, 'POINT')}">0</td>
+            <td th:text="${#numbers.formatDecimal(stats.total.deceased, 0, 'COMMA', 0, 'POINT')}">0</td>
+            <td th:text="${#numbers.formatDecimal(stats.total.tested, 0, 'COMMA', 0, 'POINT')}">0</td>
+            <td th:text="${#numbers.formatDecimal(stats.total.vaccinated1, 0, 'COMMA', 0, 'POINT')}">0</td>
+            <td th:text="${#numbers.formatDecimal(stats.total.vaccinated2, 0, 'COMMA', 0, 'POINT')}">0</td>
+            <td th:text="${stats.recordedDate}"></td>
+
+        </tr>
+    </table>
+
+    <p>
+        <a href="../indiaHome.html" th:href="@{/}">Return to Top</a>
+    </p>
+</div>
+</body>
+
+</html>
